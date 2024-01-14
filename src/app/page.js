@@ -18,25 +18,24 @@ async function getPosts() {
   }
 // `app/page.tsx` is the UI for the `/` URL
 export default async function Page() {
-    const data = await getPosts();
+    const posts = await getPosts();
     return(
         <main className="container px-4 px-lg-5">
             <div className="row gx-4 gx-lg-5 justify-content-center">
                 <div className="col-md-10 col-lg-8 col-xl-7">
-                    {data.length > 0 ? (
-                        <>
-                            {data.map((dat) => (
-                                <>test {console.log(dat.title.rendered)}</>
-                            ))}
-                        </>
-                    ) : (
-                        <>
-                         no posts
-                        </>
-                    )
-                
-                }
-                    <PostPreview />
+                    {posts.length > 0 ? (
+                            <>
+                                {posts.map((post) => (
+                                    <PostPreview key={post.id} {...post} />
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                            no posts
+                            </>
+                        )
+                    }
+                    
                     <div className="d-flex justify-content-end mb-4"><a className="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
                 </div>
             </div>
